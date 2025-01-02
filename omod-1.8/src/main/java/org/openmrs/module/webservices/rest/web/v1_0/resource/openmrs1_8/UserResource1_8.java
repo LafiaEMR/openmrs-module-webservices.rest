@@ -92,6 +92,7 @@ public class UserResource1_8 extends MetadataDelegatingCrudResource<UserAndPassw
 			description.addProperty("privileges", Representation.REF);
 			description.addProperty("roles", Representation.REF);
 			description.addProperty("retired");
+			description.addProperty("tenantId");
 			description.addSelfLink();
 			description.addLink("full", ".?v=" + RestConstants.REPRESENTATION_FULL);
 			return description;
@@ -110,6 +111,7 @@ public class UserResource1_8 extends MetadataDelegatingCrudResource<UserAndPassw
 			description.addProperty("secretQuestion");
 			description.addProperty("retired");
 			description.addProperty("auditInfo");
+			description.addProperty("tenantId");
 			description.addSelfLink();
 			return description;
 		}
@@ -125,6 +127,7 @@ public class UserResource1_8 extends MetadataDelegatingCrudResource<UserAndPassw
 		description.addRequiredProperty("username");
 		description.addRequiredProperty("password");
 		description.addRequiredProperty("person");
+		description.addProperty("tenantId");
 		
 		description.addProperty("systemId");
 		description.addProperty("userProperties");
@@ -143,6 +146,7 @@ public class UserResource1_8 extends MetadataDelegatingCrudResource<UserAndPassw
 			model
 			        .property("username", new StringProperty())
 			        .property("systemId", new StringProperty())
+					.property("tenantId", new StringProperty())
 			        .property("userProperties", new MapProperty()); //FIXME type
 		}
 		if (rep instanceof DefaultRepresentation) {
@@ -173,7 +177,7 @@ public class UserResource1_8 extends MetadataDelegatingCrudResource<UserAndPassw
 		        .property("roles", new ArrayProperty(new RefProperty("#/definitions/RoleCreate")))
 		        .property("proficientLocales", new ArrayProperty(new ObjectProperty()))
 		        .property("secretQuestion", new StringProperty())
-		        
+				.property("tenantId", new StringProperty())
 		        .required("username").required("password").required("person");
 	}
 	
